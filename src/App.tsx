@@ -20,6 +20,7 @@ function App() {
           imgRef.current.src = event.dataUrl;
         }
       });
+      markerArea.settings.displayMode = 'inline';
       markerArea.show();
     }
   }
