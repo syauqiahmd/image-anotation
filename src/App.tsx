@@ -1,25 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import * as markerjs2 from 'markerjs2';
 
 function App() {
+  let imgRef = React.createRef<HTMLImageElement>();
+  
+  function showMarkerArea() {
+    if (imgRef.current !== null) {
+      const markerArea = new markerjs2.MarkerArea(imgRef.current);
+      markerArea.addEventListener('render', event => {
+        if (imgRef.current) {
+          imgRef.current.src = event.dataUrl;
+        }
+      });
+      markerArea.show();
+    }
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <h1>DEMO CODE TEST</h1>
+        <img 
+          ref={imgRef} 
+          src={logo} 
+          alt="sample" 
+          style={{ maxWidth: '50%' }} 
+          onClick={() => showMarkerArea()}
+          />
+      </div>
   );
 }
 
